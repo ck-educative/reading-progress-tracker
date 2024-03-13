@@ -1,8 +1,20 @@
 import { Book } from './bookSlice';
 
+export const enum Genere {
+    STORY = 'story',
+    FICTION = 'fiction',
+    NONFICTION = 'nonfiction',
+    MYSTERY = 'mystery',
+    FANTASY = 'fantasy',
+    SCIFI = 'sci-fi',
+    BIOGRAPHY = 'biography',
+    HISTORY = 'history',
+    POETRY = 'poetry'
+}
+
 const mockBooks: Book[] = [
-    { id: 1, title: 'Book 1', author: 'Author 1', progress: { totalChapters: 45, numberRead: 0 } },
-    { id: 2, title: 'Book 2', author: 'Author 2', progress: { totalChapters: 10, numberRead: 10 } },
+    { id: 1, title: 'Book 1', author: 'Author 1', genere: Genere.FICTION, progress: { totalChapters: 45, numberRead: 0 } },
+    { id: 2, title: 'Book 2', author: 'Author 2', genere: Genere.SCIFI, progress: { totalChapters: 10, numberRead: 10 } },
     // Add more books as needed
 ];
 

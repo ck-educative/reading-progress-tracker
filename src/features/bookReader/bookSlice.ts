@@ -2,12 +2,11 @@ import { createSlice, PayloadAction, createAsyncThunk } from '@reduxjs/toolkit';
 import bookAPI from './BookAPI';
 import { RootState, AppThunk } from '../../app/store';
 
-// ... your existing code ...
-
 export type Book = {
     id: number;
     title: string;
     author: string;
+    genere: string;
     progress: {
         totalChapters: number;
         numberRead: number;
