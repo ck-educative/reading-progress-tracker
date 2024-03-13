@@ -18,9 +18,9 @@ const onRemove = () => {
     dispatch(removeBook(id));
 };
 
-const handleInputChange = (setter: React.Dispatch<React.SetStateAction<number>>) => (e: React.ChangeEvent<HTMLInputElement>) => {
+const handleInputChange = (value: number) => {
   setErrorMessage('');
-  setter(Number(e.target.value));
+  setId(Number(value));
 };
 
 const onSubmit = (e: React.FormEvent) => {
@@ -49,10 +49,10 @@ return (
       <form onSubmit={onSubmit}>
       {errorMessage && <div className="error-message font-mono text-red-500">{errorMessage}</div>}
       <div className='p4'>
-        <InputField label='Book ID' value={id.toString()} onChange={handleInputChange(setId as any)} placeholder="ID" required/>
+        <InputField label='Book ID' value={id.toString()} onChange={(e) => handleInputChange(Number(e.target.value))} placeholder="ID" required/>
         <InputField label='Title' value={title} onChange={(e) => setTitle(e.target.value)} placeholder="Title" required/>
         <InputField label='Author' value={author} onChange={(e) => setAuthor(e.target.value)} placeholder="Author" required/>
-        <div className="px-20 inline-flex rounded-md shadow-sm items-center justify-center mt-auto" role="group">
+        <div className="px-20 inline-flex rounded-md items-center justify-center mt-auto" role="group">
           <Button buttonName='Add Book' type="submit"></Button>
           <div className='p4 gap-x-10'></div>
           <Button buttonName='Remove Book' onClick={onRemove}></Button>

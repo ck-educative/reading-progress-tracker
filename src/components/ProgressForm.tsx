@@ -41,6 +41,7 @@ const ProgressForm: React.FC<ProgressFormProps> = (props: ProgressFormProps) => 
             numberRead: numberRead
         }
     }
+    
     dispatch(updateBook(updated));
     setBook(updated);
     // console.log(`Total chapters: ${updated.progress.totalChapters}, Chapters read: ${updated.progress.numberRead}`);

@@ -26,15 +26,10 @@ const ProgressBar: React.FC<BookId> = ({bookId}) => {
     const books = useAppSelector(selectBooks);
     const [errorMessage, setErrorMessage]= useState('');
     const book:Book|undefined = books ? books.find(book => book.id === bookId): undefined;
-
-    // if(!book){
-    //  setErrorMessage('No book found');
-    // }
-
-    // book: Book = books[bookId];
     
     return(
         <>
+        {/*TODO : create error component*/}
         {errorMessage && <text className="font-mono"> No book found</text>}
         {book && book.progress && 
         <svg className="progress" viewBox="0 0 100 100" data-test-id="progress-bar-svg">
