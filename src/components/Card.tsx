@@ -21,7 +21,7 @@ const Card: React.FC<CardProps> = ({ bookId }) => {
   })
   
 return (
-        <div className="w-96 h-70 mx-auto bg-white rounded-xl shadow-md overflow-hidden md:max-w-2xl m-4 border-2 border-gray-300 flex flex-col justify-between">
+        <div className="w-96 h-70 mx-auto bg-white rounded-xl shadow-md overflow-hidden md:max-w-2xl m-4 border-2 border-gray-300 flex-col justify-between">
             <div className="p-4 flex justify-between items-center">
                 <div className="w-1/2">
                     { book && <div className="uppercase tracking-wide text-sm text-indigo-500 font-semibold overflow-ellipsis overflow-hidden font-mono">Book ID: {book.id}</div> }   
