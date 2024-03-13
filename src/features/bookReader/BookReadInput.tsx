@@ -36,7 +36,7 @@ const onSubmit = (e: React.FormEvent) => {
   if(genere as string === ''){
     alert('Select a genere');
   }
-  
+
   if (existingBook) {
       setErrorMessage('A book with this ID already exists');
       return;
@@ -73,7 +73,7 @@ return (
       </form>
     </div>
 
-    <div className="w-1/2 flex flex-wrap">
+    <div className="flex gap-x-10 flex-wrap md:h-6">
       {(books as Book[]).map((book: Book) => (
         <Card key={book.id} bookId={book.id}/>
       ))}
