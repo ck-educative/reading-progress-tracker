@@ -2,10 +2,12 @@ import React from 'react';
 import { screen } from '@testing-library/react';
 import configureMockStore from 'redux-mock-store';
 import Card from '../Card';
-import { useAppSelector } from '../../app/hooks';
+import { useAppSelector, useAppDispatch } from '../../app/hooks';
 import { renderWithProviders } from './test.utils';
 import { ToolkitStore } from '@reduxjs/toolkit/dist/configureStore';
 import { Action } from '@reduxjs/toolkit';
+import { BookState } from '../../features/bookReader/bookSlice';
+import { CounterState } from '../../features/counter/counterSlice';
 
 
 // Create a mock store
@@ -31,20 +33,25 @@ const store = mockStore({
 });
 
 (useAppSelector as jest.Mock).mockReturnValue(mockBook);
+// Mock the dispatch function
+const mockDispatch = jest.fn();
+
+// Use the mock function when useAppDispatch is called
+(useAppDispatch as jest.Mock).mockReturnValue(mockDispatch);
 
 
 describe('Card Component', () => {
     it('renders the card with the correct title and content', () => {
         //@ts-ignore
-        const store: ToolkitStore<{ counter: CounterState; books: BookState; }, Action<any>> = mockStore({
+        const store: ToolkitStore<{ counter: CounterState; books: BookState; }, Action<any>, Middlewares<{ counter: CounterState; books: BookState; }>> = mockStore({
             counter: {},
             books: [mockBook]
         });
 
-        const { getByText } =renderWithProviders(<Card key={1} bookId={1}/>, {store})
+        renderWithProviders(<Card key={1} bookId={1}/>, {store})
 
-        const titleElement = getByText(/Test Title/i);
-        const authorElement = getByText(/Test Author/i);
+        const titleElement = screen.getByText(/Test Title/i);
+        const authorElement = screen.getByText(/Test Author/i);
 
         expect(titleElement).toBeInTheDocument();
         expect(authorElement).toBeInTheDocument();

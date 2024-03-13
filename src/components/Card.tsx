@@ -1,8 +1,9 @@
-import React, { useEffect, useState } from 'react';
-import { useAppSelector } from '../app/hooks';
+import React, { useEffect } from 'react';
 import ProgressBar from './ProgressBar';
 import ProgressForm from './ProgressForm';
-import { selectBooks } from '../features/bookReader/bookSlice';
+import { useAppDispatch, useAppSelector } from '../app/hooks';
+import { fetchBooks, selectBooks } from '../features/bookReader/bookSlice';
+import { Genere } from '../features/bookReader/BookAPI';
 
 interface CardProps {
   key: number;
@@ -10,32 +11,28 @@ interface CardProps {
 }
 
 const Card: React.FC<CardProps> = ({ bookId }) => {
-  const intialBookObject =  { id: 0, title: 'No book selected', author: '', progress: { totalChapters: 0, numberRead: 0 } };
-
-  const books = useAppSelector(selectBooks);  
-  const [book, setBook] = useState(intialBookObject);
+  const intialBookObject =  { id: 0, title: 'No book selected', author: '', genere: Genere.SCIFI, progress: { totalChapters: 0, numberRead: 0 } };
+  const dispatch = useAppDispatch();
+  const books = useAppSelector(selectBooks);
+  const book = Array.isArray(books) ? books.find(book => book.id === bookId) : intialBookObject;
 
   useEffect(() => {
-    const foundBook = Array.isArray(books) ? books.find(book => book.id === bookId) : undefined;
-    if (foundBook) {
-      setBook(foundBook);
-    } else {
-      setBook(intialBookObject);
-    }
-  }, [books, bookId, intialBookObject]);
-
+    dispatch(fetchBooks);
+  })
+  
 return (
-        <div className="w-96 h-70 mx-auto bg-white rounded-xl shadow-md overflow-hidden md:max-w-2xl m-4 border-2 border-gray-300 flex flex-col justify-between">
+        <div className="w-96 h-70 mx-auto bg-white rounded-xl shadow-md overflow-hidden md:max-w-2xl m-4 border-2 border-gray-300 flex-col justify-between">
             <div className="p-4 flex justify-between items-center">
                 <div className="w-1/2">
-                    <div className="uppercase tracking-wide text-sm text-indigo-500 font-semibold overflow-ellipsis overflow-hidden font-mono">Book ID: {book.id}</div> {/* Add this line */}    
-                    <div className="uppercase tracking-wide text-sm text-indigo-500 font-semibold overflow-ellipsis overflow-hidden font-mono">Name: {book.title}</div>
-                    <div className="uppercase tracking-wide text-sm text-indigo-500 font-semibold overflow-ellipsis overflow-hidden font-mono">By: {book.author}</div>
+                    { book && <div className="uppercase tracking-wide text-sm text-indigo-500 font-semibold overflow-ellipsis overflow-hidden font-mono">Book ID: {book.id}</div> }   
+                    { book && <div className="uppercase tracking-wide text-sm text-indigo-500 font-semibold overflow-ellipsis overflow-hidden font-mono">Name: {book.title}</div> }
+                    { book && <div className="uppercase tracking-wide text-sm text-indigo-500 overflow-ellipsis overflow-hidden font-mono font-medium">By: {book.author}</div>}
+                    { book && <div className="uppercase tracking-wide text-sm text-indigo-500 overflow-ellipsis overflow-hidden font-mono font-medium">Genere: {book.genere}</div>}
                 </div>
-                <ProgressBar bookId={book.id}/>
+                { book && <ProgressBar bookId={book.id}/>}
             </div>
             <div className="p-4">
-                <ProgressForm book={book}/>
+              { book && <ProgressForm book={book}/>}
             </div>
         </div>
     );
