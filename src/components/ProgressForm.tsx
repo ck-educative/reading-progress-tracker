@@ -55,7 +55,7 @@ const ProgressForm: React.FC<ProgressFormProps> = (props: ProgressFormProps) => 
         <label htmlFor="totalChapters" className="text-sm font-medium text-gray-700 font-mono">Total Chapters:</label>
         <input type="number" id="totalChapters" value={totalChapters} onChange={(e) => setTotalChapters(parseInt(e.target.value))}  className="border-2 border-gray-200 rounded-md p-2 w-full" />
       </div>
-      <div className="flex items-center space-x-2">
+      <div className="py-15 flex items-center space-x-2">
         <label htmlFor="numberRead" className="text-sm font-medium text-gray-700 font-mono">Chapters Read:</label>
         <input type="number" id="numberRead" value={numberRead} onChange={(e) => setNumberRead(parseInt(e.target.value))} className="border-2 border-gray-200 rounded-md p-2 w-full" />
       </div>
