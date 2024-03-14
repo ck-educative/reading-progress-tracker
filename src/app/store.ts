@@ -19,6 +19,10 @@ export const store = configureStore({
     }),
 });
 
+export function getStoreWithState(preloadedState?: RootState) {
+  return configureStore({ reducer: rootReducer, preloadedState });
+}
+
 export type RootState = ReturnType<typeof store.getState>;
 export type AppStore = typeof store;
 export type AppDispatch = typeof store.dispatch;

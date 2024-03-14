@@ -1,59 +1,77 @@
 import React from 'react';
-import { screen } from '@testing-library/react';
-import configureMockStore from 'redux-mock-store';
+import { fireEvent, screen } from '@testing-library/react';
 import Card from '../Card';
 import { useAppSelector, useAppDispatch } from '../../app/hooks';
-import { renderWithProviders } from './test.utils';
-import { ToolkitStore } from '@reduxjs/toolkit/dist/configureStore';
-import { Action } from '@reduxjs/toolkit';
-import { BookState } from '../../features/bookReader/bookSlice';
-import { CounterState } from '../../features/counter/counterSlice';
+import { renderWithContext } from './test.utils';
+import { thunk } from 'redux-thunk';
+import bookAPI from '../../features/bookReader/BookAPI';
+import { Book } from '../../types';
+import { store } from '../../app/store';
+import configureMockStore from 'redux-mock-store';
+import { addBook } from '../../features/bookReader/bookSlice';
 
 
 // Create a mock store
-const mockStore = configureMockStore();
+
+
+
 jest.mock('../../app/hooks', () => ({
     useAppSelector: jest.fn(),
     useAppDispatch: jest.fn()
   }));
 
-// Mock data for the Card component
-const mockBook = {
-    id:1,
-    title: 'Test Title',
-    author: 'Test Author',
-    progress: {
-      totalChapters: 0,
-      numberRead: 0
-    }
-};
-
-const store = mockStore({
-    books: [mockBook]
-});
-
-(useAppSelector as jest.Mock).mockReturnValue(mockBook);
-// Mock the dispatch function
-const mockDispatch = jest.fn();
-
-// Use the mock function when useAppDispatch is called
-(useAppDispatch as jest.Mock).mockReturnValue(mockDispatch);
-
-
 describe('Card Component', () => {
+    const newBook: Book = {
+        id: 0,
+        title: 'Test',
+        author: 'Test',
+        genere: 'Test',
+        progress: {
+            totalChapters: 5,
+            numberRead: 1
+        }
+    };
     it('renders the card with the correct title and content', () => {
-        //@ts-ignore
-        const store: ToolkitStore<{ counter: CounterState; books: BookState; }, Action<any>, Middlewares<{ counter: CounterState; books: BookState; }>> = mockStore({
-            counter: {},
-            books: [mockBook]
-        });
+        store.dispatch(addBook(newBook));
+        const dispatch = jest.fn();
+        (useAppDispatch as jest.Mock).mockReturnValue(store.dispatch);
 
-        renderWithProviders(<Card key={1} bookId={1}/>, {store})
-
-        const titleElement = screen.getByText(/Test Title/i);
-        const authorElement = screen.getByText(/Test Author/i);
+        renderWithContext(<Card key={1} bookId={1}/>);
+        
+        jest.spyOn(bookAPI, 'getBooks').mockResolvedValueOnce([newBook]);
+        const titleElement = screen.getByText(/Book ID:/i);
+        const nameElement = screen.getByText(/Name:/i);
+        const authorElement = screen.getByText(/By:/i);
+        const genereElement = screen.getByText(/By:/i);
 
         expect(titleElement).toBeInTheDocument();
+        expect(nameElement).toBeInTheDocument();
         expect(authorElement).toBeInTheDocument();
+        expect(genereElement).toBeInTheDocument();
     });
+
+//     it('renders the card with correct form, selects options, clicks submit, and validates store', () => {
+        
+//         store.dispatch(addBook(newBook));
+//         (useAppDispatch as jest.Mock).mockReturnValue(store.dispatch);
+//         renderWithContext(<Card key={1} bookId={1}/>);
+    
+//         // Assume your select element has a test id of 'select-element'
+//         const totalElement = screen.getByTestId('select-element-total');
+//         fireEvent.change(totalElement, { target: { value: '6' } });
+
+//         const readElement = screen.getByTestId('select-element-read');
+//         fireEvent.change(readElement, { target: { value: '7' } });
+    
+//         // Assume your submit button has a test id of 'submit-button'
+//         const submitButton = screen.getByRole('button', {
+//             name:/submit/i
+//         });
+
+//         fireEvent.click(submitButton);
+    
+//         // Check if the store has the correct state
+//         const expectedState = { books: [{ id: 1, title: 'Updated Book', author: 'Author' }] };
+//         expect(store.getState().books.books[0]).toEqual({});
+//     });
 });

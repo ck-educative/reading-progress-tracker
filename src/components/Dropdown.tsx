@@ -29,19 +29,19 @@ const genere = [
   return (
     <div className="md:flex md:items-center mb-6">
     <div className="md:w-1/3">
-        <label className="block text-lue-500 font-bold md:text-right mb-1 md:mb-0 pr-4 font-mono text-gray-500" 
-                datatest-id="grid-bookname-label"
+        <label className="block font-bold md:text-right mb-1 md:mb-0 pr-4 text-gray-500" 
+                data-testid="grid-bookname-label"
                 aria-label="label">
             { label }
         </label>
         </div>
     <div className="md:w-2/3">
         <select 
-            className="block appearance-none md:w-1/2 w-full p-4 text-gray-400 font-mono  border-2 border-gray-500 rounded-md mb-4 space-y-10rounded leading-tight focus:outline-none focus:bg-white focus:border-gray-500 focus:text-blue-300" 
+            className="block appearance-none md:w-1/2 w-full p-4 text-gray-400 border-2 border-gray-500 rounded-md mb-4 space-y-10rounded leading-tight focus:outline-none focus:bg-white focus:border-gray-500 focus:text-blue-300" 
             value={selectedOption || ''}
             onChange={(e) => handleSelect(e.target.value as Genere)}
         >
-            <option value="" className="font-mono text-blue-300">Select...</option>
+            <option value="">Select...</option>
             {Object.values(genere).map((value, index) => (
                 <option key={index} value={value}>
                     {value}

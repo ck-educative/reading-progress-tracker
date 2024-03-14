@@ -1,4 +1,4 @@
-import { Book } from './bookSlice';
+import { Book } from "../../types";
 
 export const enum Genere {
     STORY = 'story',

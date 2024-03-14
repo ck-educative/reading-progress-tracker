@@ -13,6 +13,8 @@ describe('Dropdown component', () => {
     it('calls onSelect when an option is selected', () => {
         const handleSelect = jest.fn();
         render(<Dropdown label='test' onSelect={handleSelect} />);
+        const dropdownLabel = screen.getByTestId('grid-bookname-label').textContent;
+        expect(dropdownLabel).toBe('test');
         const dropdown = screen.getByRole('combobox');
         fireEvent.change(dropdown, { target: { value: Genere.BIOGRAPHY } });
         expect(handleSelect).toHaveBeenCalledWith(Genere.BIOGRAPHY);

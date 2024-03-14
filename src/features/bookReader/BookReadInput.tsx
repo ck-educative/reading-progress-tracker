@@ -1,18 +1,19 @@
 import React, { useEffect, useState } from 'react';
 import { useAppDispatch, useAppSelector } from '../../app/hooks';
-import { Book, BookState, addBook, removeBook, selectBooks } from './bookSlice';
+import { addBook, removeBook, selectBooks } from './bookSlice';
 import InputField from '../../components/InputField';
 import Button from '../../components/Button';
 import Card from '../../components/Card';
 import { Genere } from './BookAPI';
 import Dropdown from '../../components/Dropdown';
+import { Book, BookState } from '../../types';
 
 const BookReadInput = () => {
 
 const books = useAppSelector(selectBooks);
-const dispatch = useAppDispatch(); // Initialize the dispatch function
+const dispatch = useAppDispatch(); 
 const [id, setId] = useState(0); 
-const [title, setTitle] = useState(''); // Add the missing setId function declaration
+const [title, setTitle] = useState(''); 
 const [author, setAuthor] = useState('');
 const [errorMessage, setErrorMessage] = useState('');
 const [genere, setGenere] = useState<Genere | null>(null);
@@ -32,7 +33,7 @@ const handleInputChange = (value: number) => {
 
 const onSubmit = (e: React.FormEvent) => {
   e.preventDefault();
-  const existingBook = books.find((book) => book.id === id);
+  const existingBook = books.find((book:Book) => book.id === id);
   if(genere as string === ''){
     alert('Select a genere');
   }
