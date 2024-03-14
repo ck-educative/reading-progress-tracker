@@ -5,13 +5,13 @@
   
   .progress-background {
     fill: none;
-    stroke: #ddd;
+    stroke: #dcbc70;
     stroke-width: 5;
   }
   
   .progress-bar {
     fill: none;
-    stroke: purple;
+    stroke: rgb(123, 199, 184);
     stroke-width: 5;
     stroke-dasharray: 0 283;
     stroke-linecap: round;
@@ -19,9 +19,3 @@
     transform: rotate(-90deg);
     animation: progress 2s ease-out forwards;
   }
-  
-  /* @keyframes progress {
-    to {
-      stroke-dasharray: 283 283;
-    }
-  } */

@@ -1,7 +1,8 @@
 import React, { useState } from 'react';
 import './styles/ProgressBar.Module.css';
 import { useAppSelector } from '../app/hooks';
-import { Book, selectBooks } from '../features/bookReader/bookSlice';
+import { selectBooks } from '../features/bookReader/bookSlice';
+import { Book } from '../types';
 
 export interface BookId {
     bookId: number;
@@ -25,7 +26,7 @@ const percentage = (progess: Progress) => {
 const ProgressBar: React.FC<BookId> = ({bookId}) => {
     const books = useAppSelector(selectBooks);
     const [errorMessage, setErrorMessage]= useState('');
-    const book:Book|undefined = books ? books.find(book => book.id === bookId): undefined;
+    const book: Book|undefined = books ? books.find(book => book.id === bookId): undefined;
     
     return(
         <>

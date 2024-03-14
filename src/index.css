@@ -1,3 +1,53 @@
 @import 'tailwindcss/base'; 
 @import 'tailwindcss/components'; 
 @import 'tailwindcss/utilities'; 
+
+@layer base {
+   html {
+    font-family: 'Arial', 'Helvetica', sans-serif;
+    color: slategray; 
+    }
+   h1 {
+    @apply text-4xl;
+   }
+    .bg-gradient-to-b {
+        background-image: linear-gradient(to bottom, var(--tw-gradient-stops));
+    } 
+    body {
+        @apply bg-gradient-to-b  from-cyan-50 to-yellow-50 min-h-screen;
+    }
+}
+
+
+@layer utilities {
+    .shadow-primary-3 {
+      box-shadow: 0 10px 15px -3px rgba(66, 153, 225, 0.5), 0 4px 6px -2px rgba(66, 153, 225, 0.05);
+    }
+    .bg-primary-accent-300 {
+        background-color:cadetblue;
+      }
+      .hover\:bg-primary-accent-300:hover {
+        background-color: cyan;
+      }
+      .shadow-primary-3 {
+        box-shadow: 0 10px 15px -3px rgba(66, 153, 225, 0.5), 0 4px 6px -2px rgba(66, 153, 225, 0.05);
+      }
+      .shadow-primary-2 {
+        box-shadow: 0 5px 10px -2px rgba(66, 153, 225, 0.5), 0 2px 3px -1px rgba(66, 153, 225, 0.05);
+      }
+      .hover\:shadow-primary-2:hover {
+        box-shadow: 0 5px 10px -2px rgba(66, 153, 225, 0.5), 0 2px 3px -1px rgba(66, 153, 225, 0.05);
+      }
+      .shadow-dark-strong {
+        box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.6), 0 10px 10px -5px rgba(0, 0, 0, 0.04);
+      }
+      .dark\:active\:shadow-dark-strong:active {
+        box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.6), 0 10px 10px -5px rgba(0, 0, 0, 0.04);
+      }
+  }
+
+@layer components {
+    .button{
+        @apply px-4 pt-2 w-40 h-12 pb-4 sm:p-3 rounded text-xs bg-slate-500 text-white font-medium uppercase leading-normal shadow-primary-3 transition duration-150 ease-in-out hover:bg-primary-accent-300 hover:shadow-primary-2 dark:active:shadow-dark-strong;
+    }
+}

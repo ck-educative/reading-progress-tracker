@@ -1,10 +1,9 @@
 import React, { useState } from 'react';
-import { Book, selectBooks, updateBook } from '../features/bookReader/bookSlice';
+import { selectBooks, updateBook } from '../features/bookReader/bookSlice';
 import { useAppDispatch, useAppSelector } from '../app/hooks';
+import { Book, ProgressFormProps } from '../types';
+import Button from './Button';
 
-interface ProgressFormProps {
-  book: Book;
-}
 
 const ProgressForm: React.FC<ProgressFormProps> = (props: ProgressFormProps) => {
 
@@ -52,20 +51,18 @@ const ProgressForm: React.FC<ProgressFormProps> = (props: ProgressFormProps) => 
   return (
     <form onSubmit={handleSubmit} className="flex flex-col space-y-4 w-full max-w-xs">
       <div className="flex items-center space-x-2">
-        <label htmlFor="totalChapters" className="text-sm font-medium text-gray-700 font-mono">Total Chapters:</label>
-        <input type="number" id="totalChapters" value={totalChapters} onChange={(e) => setTotalChapters(parseInt(e.target.value))}  className="border-2 border-gray-200 rounded-md p-2 w-full" />
+        <label htmlFor="totalChapters" className="text-sm font-medium text-gray-700">Total Chapters:</label>
+        <input type="number" id="totalChapters" value={totalChapters} onChange={(e) => setTotalChapters(parseInt(e.target.value))}  className="border-2 border-gray-200 rounded-md p-2 w-full" data-testid="select-element-total" />
       </div>
       <div className="py-15 flex items-center space-x-2">
-        <label htmlFor="numberRead" className="text-sm font-medium text-gray-700 font-mono">Chapters Read:</label>
-        <input type="number" id="numberRead" value={numberRead} onChange={(e) => setNumberRead(parseInt(e.target.value))} className="border-2 border-gray-200 rounded-md p-2 w-full" />
+        <label htmlFor="numberRead" className="text-sm font-medium text-gray-700">Chapters Read:</label>
+        <input type="number" id="numberRead" value={numberRead} onChange={(e) => setNumberRead(parseInt(e.target.value))} className="border-2 border-gray-200 rounded-md p-2 w-full" data-testid="select-element-read"/>
       </div>
-      <button type="submit" className="bg-blue-500 text-white rounded-md p-2 w-full font-mono">Submit</button>
+    {/* TODO:Reuse buttob component after see */}
+    <Button buttonName='Submit' type="submit" data-testid="submit-button"></Button>
+      {/* <button type="submit" className="bg-slate-500 text-white rounded-md p-2 w-full font-mono">Submit</button> */}
     </form>
   );
 };
 
 export default ProgressForm;
-
-function dispatch(arg0: any) {
-    throw new Error('Function not implemented.');
-}

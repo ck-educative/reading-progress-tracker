@@ -1,37 +1,48 @@
-import { AnyAction, AsyncThunkAction } from '@reduxjs/toolkit';
-import bookReducer, { Book, BookState, addBook, removeBook } from './bookSlice';
+import { configureStore } from '@reduxjs/toolkit';
+import bookReducer, { addBook, removeBook, updateBook } from '../bookReader/bookSlice';
+import bookAPI from './BookAPI';
+import { Book } from '../../types';
 
-describe('book reducer', () => {
-    const initialState: BookState = {
-        books: [],
-        status: 'idle',
-        error: null,
-    };
-
-    it('should handle initial state', () => {
-        expect(bookReducer(undefined, { type: 'unknown' } as AnyAction)).toEqual({
-            books: [],
-            status: 'idle',
-            error: null,
-        });
+describe('should return api responses', () => {
+    const store = configureStore({ reducer: bookReducer });
+    const newBook: Book = {
+        id: 0,
+        title: 'Test',
+        author: 'Test',
+        genere: 'Test',
+        progress: {
+            totalChapters: 0,
+            numberRead: 0
+        }
+    }
+    it('should add a book to the store', async () => {
+        jest.spyOn(bookAPI, 'addBook').mockResolvedValueOnce(newBook);
+        await store.dispatch(addBook(newBook));
+        expect(store.getState().books).toEqual([newBook]);
     });
+    it('should remove to the store', async () => {
+        jest.spyOn(bookAPI, 'removeBook').mockResolvedValueOnce(1);
+        await store.dispatch(removeBook(1));
+        expect(store.getState().books).toEqual([]);
+    });
+    it.only('should update book in the store', async () => {
+        const updatedBook: Book = {
+            id: 0,
+            title: 'Updated',
+            author: 'Updated',
+            genere: 'Updated',
+            progress: {
+                totalChapters: 0,
+                numberRead: 0
+            }
+        };
 
-    // TODO: fix typing for these tests
-    // it('should handle removeBook', () => {
-    //     const actual = bookReducer(initialState, removeBook(1));
-    //     expect(actual.books).toEqual([]);
-    // });
+        //create data in the store
+        jest.spyOn(bookAPI, 'addBook').mockResolvedValueOnce(newBook);
+        await store.dispatch(addBook(newBook));
+        jest.spyOn(bookAPI, 'updateBook').mockResolvedValueOnce(updatedBook);
+        await store.dispatch(updateBook(updatedBook));
 
-
-    // it('should handle addBook', () => {
-    //     const actual = bookReducer(initialState, addBook({
-    //         id: 1, title: 'Test Book', author: 'Test Author',
-    //         progress: {
-    //             totalChapters: 0,
-    //             numberRead: 0
-    //         }
-    //     }) as unknown as AsyncThunkAction<Book, Book, AsyncThunkConfig>);
-    //     expect(actual.books).toEqual([{ id: 1, title: 'Test Book', author: 'Test Author' }]);
-    // });
-
+        expect(store.getState().books).toEqual([updatedBook]);
+    });
 });

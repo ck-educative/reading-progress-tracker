@@ -1,24 +1,7 @@
 import { createSlice, PayloadAction, createAsyncThunk } from '@reduxjs/toolkit';
 import bookAPI from './BookAPI';
 import { RootState, AppThunk } from '../../app/store';
-
-export type Book = {
-    id: number;
-    title: string;
-    author: string;
-    genere: string;
-    progress: {
-        totalChapters: number;
-        numberRead: number;
-    }
-    // Add any other properties you need for a book
-};
-
-export interface BookState {
-    books: Book[];
-    status: 'idle' | 'loading' | 'succeeded' | 'failed';
-    error: string | null;
-}
+import { Book, BookState } from '../../types';
 
 const initialState: BookState = {
     books: [],
