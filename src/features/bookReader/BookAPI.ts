@@ -1,15 +1,15 @@
 import { Book } from '../../types';
 
 export const enum Genere {
-    STORY = 'story',
-    FICTION = 'fiction',
-    NONFICTION = 'nonfiction',
-    MYSTERY = 'mystery',
-    FANTASY = 'fantasy',
-    SCIFI = 'sci-fi',
-    BIOGRAPHY = 'biography',
-    HISTORY = 'history',
-    POETRY = 'poetry'
+  STORY = 'story',
+  FICTION = 'fiction',
+  NONFICTION = 'nonfiction',
+  MYSTERY = 'mystery',
+  FANTASY = 'fantasy',
+  SCIFI = 'sci-fi',
+  BIOGRAPHY = 'biography',
+  HISTORY = 'history',
+  POETRY = 'poetry'
 }
 
 const mockBooks: Book[] = [
@@ -33,10 +33,10 @@ const addBook = async (book: Book) => {
 
 const updateBook = async (book: Book) => {
   const index = mockBooks.findIndex((b) => b.id === book.id);
-  console.log('updating book', mockBooks[index]);
   if (index !== -1) {
     mockBooks[index] = book;
   }
+  console.log('updated book', mockBooks[index]);
   return book;
 };
 

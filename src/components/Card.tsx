@@ -4,6 +4,7 @@ import ProgressForm from './ProgressForm';
 import { useAppDispatch, useAppSelector } from '../app/hooks';
 import { fetchBooks, selectBooks } from '../features/bookReader/bookSlice';
 import { Genere } from '../features/bookReader/BookAPI';
+import { BookState } from '../types';
 
 interface CardProps {
   key: number;
@@ -14,9 +15,10 @@ const Card: React.FC<CardProps> = ({ bookId }) => {
 
   const intialBookObject =  { id: 0, title: 'No book selected', author: '', genere: Genere.SCIFI, progress: { totalChapters: 0, numberRead: 0 } };
   const dispatch = useAppDispatch();
-  const books = useAppSelector(selectBooks);
+  const books:BookState = useAppSelector(selectBooks);
   const book = Array.isArray(books) ? books.find(book => book.id === bookId) : intialBookObject;
 
+  console.log('bookId=>' , bookId);
   useEffect(() => {
     dispatch(fetchBooks);
   });

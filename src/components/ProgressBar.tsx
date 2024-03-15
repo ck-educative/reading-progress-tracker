@@ -27,7 +27,7 @@ const ProgressBar: React.FC<BookId> = ({bookId}) => {
   const books = useAppSelector(selectBooks);
   // eslint-disable-next-line @typescript-eslint/no-unused-vars
   const [errorMessage, setErrorMessage]= useState('');
-  const book: Book|undefined = books ? books.find(book => book.id === bookId): undefined;
+  const book = Array.isArray(books) ? books.find(book => book.id === bookId) : undefined;
     
   return(
     <>
@@ -36,8 +36,8 @@ const ProgressBar: React.FC<BookId> = ({bookId}) => {
       {book && book.progress && 
         <svg className='progress' viewBox='0 0 100 100' data-test-id='progress-bar-svg'>
           <circle className='progress-background' cx='50' cy='50' r='45'></circle>
-          <circle className='progress-bar' aria-valuenow={book.progress.numberRead} aria-valuemax={book.progress.totalChapters} style={{ strokeDasharray: `${calculateProgress(book.progress)} 283` }} cx='50' cy='50' r='45' data-testid='progress-bar'></circle>
-          <text className='font-mono' x='50' y='55' textAnchor='middle' fill='black' fontSize='15px' >{percentage(book.progress)}%</text>
+          <circle className='progress-bar' aria-valuenow={book.progress.numberRead} aria-valuemax={book.progress.totalChapters} style={{ strokeDasharray: `${calculateProgress(book.progress)} 283` }} cx='50' cy='50' r='45' data-testid='progress-bar-circle'></circle>
+          <text className='font-mono' x='50' y='55' textAnchor='middle' fill='black' fontSize='15px' data-testid='progress-percent'>{percentage(book.progress)}%</text>
         </svg>
       }
     </>
