@@ -25,7 +25,8 @@
     "start": "react-scripts start",
     "build": "react-scripts build",
     "test": "react-scripts test",
-    "eject": "react-scripts eject"
+    "eject": "react-scripts eject",
+    "lint": "eslint --ext js,jsx,ts,tsx src/**"
   },
   "eslintConfig": {
     "extends": [
@@ -47,6 +48,10 @@
   },
   "devDependencies": {
     "@types/redux-mock-store": "^1.0.6",
+    "@typescript-eslint/eslint-plugin": "^7.2.0",
+    "@typescript-eslint/parser": "^7.2.0",
+    "eslint": "^8.57.0",
+    "eslint-plugin-react": "^7.34.0",
     "msw": "^2.2.3",
     "react-test-renderer": "^18.2.0",
     "redux-mock-store": "^1.5.4",

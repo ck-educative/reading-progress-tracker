@@ -1,12 +1,13 @@
+/* eslint-disable no-undef */
 /** @type {import('tailwindcss').Config} */
 module.exports = {
   content: [
-    "./src/**/*.{js,jsx,ts,tsx}",
+    './src/**/*.{js,jsx,ts,tsx}',
   ],
   theme: {
     extend: {
       colors: {
-        'brand-light': '#e5ea7d',
+        'brand-light': '#',
         'brand-dark': '#c2dab9',
       }
     }
