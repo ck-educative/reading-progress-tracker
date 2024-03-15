@@ -24,10 +24,10 @@ const percentage = (progess: Progress) => {
 }
 
 const ProgressBar: React.FC<BookId> = ({bookId}) => {
-  const books = useAppSelector(selectBooks);
+  const books:Book[] = useAppSelector(selectBooks);
   // eslint-disable-next-line @typescript-eslint/no-unused-vars
   const [errorMessage, setErrorMessage]= useState('');
-  const book = Array.isArray(books) ? books.find(book => book.id === bookId) : undefined;
+  const book: Book | undefined = Array.isArray(books) ? books.find(book => book.id === bookId) : undefined;
     
   return(
     <>
