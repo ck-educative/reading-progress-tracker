@@ -18,23 +18,22 @@ const Card: React.FC<CardProps> = ({ bookId }) => {
   const books: Book[] = useAppSelector(selectBooks);
   const book = Array.isArray(books) ? books.find(book => book.id === bookId) : intialBookObject;
 
-  console.log('bookId=>' , bookId);
   useEffect(() => {
     dispatch(fetchBooks);
   });
   
   return (
-    <div className='w-auto h-auto mx-auto bg-white rounded-xl shadow-md overflow-hidden md:max-w-2xl md:h-30 m-4 border-2 border-gray-300 flex-col justify-between'>
-      <div className='p-4 flex justify-between items-center'>
+    <div className='card-info-container'>
+      <div className='card-child-container'>
         <div className='w-1/2'>
-          { book && <div className='uppercase tracking-wide text-sm font-semibold overflow-ellipsis overflow-hidden'>Book ID: {book.id}</div> }   
-          { book && <div className='uppercase tracking-wide text-sm font-semibold overflow-ellipsis overflow-hidden'>Name: {book.title}</div> }
-          { book && <div className='uppercase tracking-wide text-sm overflow-ellipsis overflow-hidden font-medium'>By: {book.author}</div>}
-          { book && <div className='uppercase tracking-wide text-sm overflow-ellipsis overflow-hidden font-medium'>Genere: {book.genere}</div>}
+          { book && <div className='textbold-card-el'>Book ID: {book.id}</div> }   
+          { book && <div className='textbold-card-el'>Name: {book.title}</div> }
+          { book && <div className='textnormal-card-el'>By: {book.author}</div>}
+          { book && <div className='textnormal-card-el'>Genere: {book.genere}</div>}
         </div>
         { book && <ProgressBar bookId={book.id}/>}
       </div>
-      <div className='p-4 flex justify-between'>
+      <div className='card-child-container'>
         { book && <ProgressForm book={book}/>}
       </div>
     </div>

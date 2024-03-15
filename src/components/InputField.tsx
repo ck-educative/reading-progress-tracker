@@ -12,7 +12,7 @@ export const InputField: React.FC<InputFieldProps> = ({ label, value, onChange, 
   return (
     <div className='md:flex md:items-center mb-6'>
       <div className='md:w-1/3'>
-        <label className='block font-bold md:text-right mb-1 md:mb-0 pr-4 text-gray-500' 
+        <label className='label-main-form' 
           datatest-id='grid-bookname-label'
           aria-label='label'>
           { label }
@@ -24,12 +24,11 @@ export const InputField: React.FC<InputFieldProps> = ({ label, value, onChange, 
           onChange = { onChange }
           placeholder = { placeholder }
           required = { required }
-          className = 'p-4 text-blue-300 border-2 border-gray-500 rounded-md mb-4 space-y-10'
+          className = 'input-main-form'
           aria-label={ placeholder }
         />
       </div>
     </div>
-
   );
 };
 

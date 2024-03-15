@@ -4,6 +4,7 @@ import { addBook, removeBook, selectBooks } from './bookSlice';
 import InputField from '../../components/InputField';
 import Button from '../../components/Button';
 import Card from '../../components/Card';
+import Error from '../../components/Error';
 import { Genere } from './BookAPI';
 import Dropdown from '../../components/Dropdown';
 import { Book } from '../../types';
@@ -17,6 +18,8 @@ const BookReadInput = () => {
   const [author, setAuthor] = useState('');
   const [errorMessage, setErrorMessage] = useState('');
   const [genere, setGenere] = useState<Genere | null>(null);
+  const [showError, setShowError] = useState(false);
+
 
   const handleGenreSelect = (selectedGenre: Genere) => {
     setGenere(selectedGenre);
@@ -40,6 +43,7 @@ const BookReadInput = () => {
 
     if (existingBook) {
       setErrorMessage('A book with this ID already exists');
+      setShowError(true);
       return;
     }
     dispatch(addBook({ id, title, author, genere, progress: {totalChapters:0, numberRead:0}} as Book));
@@ -59,7 +63,7 @@ const BookReadInput = () => {
     <div className='flex'>
       <div className='w-1/2 items-left'>
         <form onSubmit={onSubmit}>
-          {errorMessage && <div className='error-message font-mono text-red-500'>{errorMessage}</div>}
+          {showError && <Error message={errorMessage} onClose={() => setShowError(false)} />}
           <div className='p4'>
             <InputField label='Book ID' value={id.toString()} onChange={(e) => handleInputChange(Number(e.target.value))} placeholder='ID' required/>
             <InputField label='Title' value={title} onChange={(e) => setTitle(e.target.value)} placeholder='Title' required/>

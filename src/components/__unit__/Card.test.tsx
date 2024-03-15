@@ -1,12 +1,12 @@
 import React from 'react';
-import { fireEvent, screen, waitFor } from '@testing-library/react';
+import { fireEvent, screen } from '@testing-library/react';
 import Card from '../Card';
 import {  useAppDispatch, useAppSelector } from '../../app/hooks';
 import { renderWithContext } from './test.utils';
 import bookAPI from '../../features/bookReader/BookAPI';
 import { Book } from '../../types';
 import { store } from '../../app/store';
-import { addBook, fetchBooks, selectBooks } from '../../features/bookReader/bookSlice';
+import { addBook } from '../../features/bookReader/bookSlice';
 
 // Create a mock store
 jest.mock('../../app/hooks', () => ({
@@ -23,17 +23,6 @@ describe('Card Component', () => {
     progress: {
       totalChapters: 5,
       numberRead: 1
-    }
-  };
-
-  const updatedBook: Book = {
-    id: 55,
-    title: 'Test for Card',
-    author: 'Test for Card',
-    genere: 'Test for Card',
-    progress: {
-      totalChapters: 5,
-      numberRead: 3
     }
   };
 
@@ -82,8 +71,8 @@ describe('Card Component', () => {
     const totalElement = screen.getByTestId<HTMLInputElement>('select-element-total');
     const readElement = screen.getByTestId<HTMLInputElement>('select-element-read');
 
-    expect(totalElement.value).toBe("5");
-    expect(readElement.value).toBe("1");
+    expect(totalElement.value).toBe('5');
+    expect(readElement.value).toBe('1');
   });
 
 

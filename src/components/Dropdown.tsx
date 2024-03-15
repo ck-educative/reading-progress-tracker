@@ -29,7 +29,7 @@ const Dropdown: React.FC<DropdownProps> = ( { label, onSelect }) => {
   return (
     <div className='md:flex md:items-center mb-6'>
       <div className='md:w-1/3'>
-        <label className='block font-bold md:text-right mb-1 md:mb-0 pr-4 text-gray-500' 
+        <label className='label-main-form' 
           data-testid='grid-bookname-label'
           aria-label='label'>
           { label }
@@ -37,7 +37,7 @@ const Dropdown: React.FC<DropdownProps> = ( { label, onSelect }) => {
       </div>
       <div className='md:w-2/3'>
         <select 
-          className='block appearance-none md:w-1/2 w-full p-4 text-gray-400 border-2 border-gray-500 rounded-md mb-4 space-y-10rounded leading-tight focus:outline-none focus:bg-white focus:border-gray-500 focus:text-blue-300' 
+          className='select-main-form'
           value={selectedOption || ''}
           onChange={(e) => handleSelect(e.target.value as Genere)}
         >

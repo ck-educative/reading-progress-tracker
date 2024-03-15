@@ -3,8 +3,9 @@ import './styles/ProgressBar.Module.css';
 import { useAppSelector } from '../app/hooks';
 import { selectBooks } from '../features/bookReader/bookSlice';
 import { Book } from '../types';
+import  Error from './Error'; 
 
-export interface BookId {
+export interface ProgressBarProps {
     bookId: number;
 }
 
@@ -23,16 +24,17 @@ const percentage = (progess: Progress) => {
   return  Math.floor(fraction);
 }
 
-const ProgressBar: React.FC<BookId> = ({bookId}) => {
+const ProgressBar: React.FC<ProgressBarProps> = ({bookId}) => {
   const books:Book[] = useAppSelector(selectBooks);
   // eslint-disable-next-line @typescript-eslint/no-unused-vars
   const [errorMessage, setErrorMessage]= useState('');
+  // eslint-disable-next-line @typescript-eslint/no-unused-vars
+  const [showError, setShowError] = useState(false);
   const book: Book | undefined = Array.isArray(books) ? books.find(book => book.id === bookId) : undefined;
     
   return(
     <>
-      {/*TODO : create error component*/}
-      {errorMessage && <text className='font-mono'> No book found</text>}
+      {showError && <Error message={errorMessage} onClose={() => setShowError(false)} />}
       {book && book.progress && 
         <svg className='progress' viewBox='0 0 100 100' data-test-id='progress-bar-svg'>
           <circle className='progress-background' cx='50' cy='50' r='45'></circle>

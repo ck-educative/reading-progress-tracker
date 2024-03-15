@@ -36,7 +36,7 @@ const updateBook = async (book: Book) => {
   if (index !== -1) {
     mockBooks[index] = book;
   }
-  console.log('updated book', mockBooks[index]);
+  //console.log('updated book', mockBooks[index]);
   return book;
 };
 
