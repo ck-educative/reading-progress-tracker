@@ -48,6 +48,49 @@
 
 @layer components {
     .button{
-        @apply px-4 pt-2 w-40 h-12 pb-4 sm:p-3 rounded text-xs bg-slate-500 text-white font-medium uppercase leading-normal shadow-primary-3 transition duration-150 ease-in-out hover:bg-primary-accent-300 hover:shadow-primary-2 dark:active:shadow-dark-strong;
+      @apply px-4 pt-2 w-40 h-12 pb-4 sm:p-3 rounded text-xs bg-slate-500 text-white font-medium uppercase leading-normal shadow-primary-3 transition duration-150 ease-in-out hover:bg-primary-accent-300 hover:shadow-primary-2 dark:active:shadow-dark-strong;
     }
+    .button-container {
+      @apply px-20 gap-x-10 gap-y-10 justify-center
+    }
+    .label-main-form {
+      @apply block font-bold md:text-right mb-1 md:mb-0 pr-4 text-gray-500
+    }
+    .input-main-form {
+      @apply p-4 text-blue-500 border-2 border-gray-500 rounded-md mb-4 space-y-10
+    }
+    .select-main-form {
+      @apply block appearance-none md:w-1/2 w-full p-4 text-gray-400 border-2 border-gray-500 rounded-md mb-4 space-y-10 leading-tight focus:outline-none focus:bg-white focus:border-gray-500 focus:text-blue-500
+    }
+    .textbold-card-el {
+      @apply uppercase tracking-wide text-sm font-semibold overflow-ellipsis overflow-hidden
+    }
+    .textnormal-card-el {
+      @apply uppercase tracking-wide text-sm overflow-ellipsis overflow-hidden font-medium
+    }
+    .card-info-container {
+      @apply w-auto h-auto mx-auto bg-white rounded-xl shadow-md overflow-hidden md:max-w-2xl m-4 border-2 border-gray-300 flex-col justify-between
+    }
+    .card-child-container {
+      @apply p-4 flex justify-between items-center
+    }
+    .progress-form{
+      @apply flex flex-col space-y-4 w-full max-w-xs
+    }
+    .progress-form-container {
+      @apply flex items-center space-x-2
+    }
+    .progress-form-fields {
+      @apply text-sm font-medium text-gray-700
+    }
+    .progress-form-input {
+      @apply border-2 border-gray-200 rounded-md p-2 w-full
+    }
+    .error-container {
+      @apply bg-red-100 border border-red-400 text-red-700 px-4 py-3 rounded relative
+    }
+    .error-button {
+      @apply fill-current h-6 w-6 text-red-500
+    }
+
 }
